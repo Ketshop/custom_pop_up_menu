@@ -34,6 +34,7 @@ class CustomPopupMenuController extends ChangeNotifier {
 
 class CustomPopupMenu extends StatefulWidget {
   CustomPopupMenu({
+    required this.onTap,
     required this.child,
     required this.menuBuilder,
     required this.pressType,
@@ -60,6 +61,7 @@ class CustomPopupMenu extends StatefulWidget {
   final Widget Function() menuBuilder;
   final PreferredPosition? position;
   final void Function(bool)? menuOnChange;
+  final VoidCallback onTap;
 
   @override
   _CustomPopupMenuState createState() => _CustomPopupMenuState();
@@ -196,11 +198,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         child: widget.child,
-        onTap: () {
-          if (widget.pressType == PressType.singleClick) {
-            _controller?.showMenu();
-          }
-        },
+        onTap: widget.onTap,
         onLongPress: () {
           if (widget.pressType == PressType.longPress) {
             _controller?.showMenu();
